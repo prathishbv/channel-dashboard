@@ -8,23 +8,31 @@
   ```
   python -m venv venv
   ```
-+ Activate your virtual environment
++ Activate your virtual environment<br>
+  For Linux
   ```
   source venv/bin/activate
+  ```
+  For windows
+  ```
+  .\venv\Scripts\activate
   ```
 + Install the requirements
   ```
   pip install -r requirements.txt
   ```
-+ Navigate to the folder consisting of manage.py and create a superuser in Django
++ Navigate to the folder consisting of manage.py
   ```
   cd dashboard/
-  python manage.py createsuperuser
   ```
 + Migrate the models
   ```
   python manage.py makemigrations
   python manage.py migrate
+  ```
++ Create a superuser in Django
+  ```
+  python manage.py createsuperuser
   ```
 + Run the Django server
   ```
