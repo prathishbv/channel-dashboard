@@ -4,7 +4,7 @@ from .serializers import DeviceSerializer
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 
-
+# Helps us to get the data serialized
 class DeviceListCreateAPIView(generics.ListCreateAPIView):
     authentication_classes = [TokenAuthentication] 
     permission_classes = [IsAuthenticated]

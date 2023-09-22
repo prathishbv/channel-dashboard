@@ -6,6 +6,7 @@ from .models import Device
 from rest_framework.authtoken.models import Token 
 from django.conf import settings
 
+# This will be triggered when there is any change in the Device model and updates the channel for asynchronous communication
 @receiver(post_save, sender=Device)
 def device_update_notification(sender, instance, created, **kwargs):
     if created:

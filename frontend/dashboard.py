@@ -7,6 +7,7 @@ import threading
 import requests
 
 class Dashboard(tk.Tk):
+    # Initiate the Tkinker frame
     def __init__(self):
         super().__init__()
         self.title("Device Monitoring Dashboard")
@@ -47,6 +48,7 @@ class Dashboard(tk.Tk):
         self.websocket_thread.daemon = True
         self.websocket_thread.start()
 
+    # Runs in a Thread and start the web_Socket connection
     def start_websocket(self):
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
@@ -55,6 +57,7 @@ class Dashboard(tk.Tk):
         except websockets.exceptions.WebSocketException as e:
             self.handle_websocket_error(str(e))
 
+    # Helps for asynchronous communication between Django and Tkinter application
     async def websocket_handler(self):
         try:
             token = self.get_token()
@@ -74,6 +77,7 @@ class Dashboard(tk.Tk):
     def handle_websocket_error(self, error_message):
         print(f"WebSocket Error: {error_message}")
 
+    # Filter based on the selected status 
     def filter_devices(self):
         selected_status = self.status_combobox.get()
         if selected_status == "All":
@@ -82,6 +86,7 @@ class Dashboard(tk.Tk):
             filtered_devices = [device for device in self.devices if device['status'] == selected_status]
             self.display_devices(filtered_devices)
 
+    # Helps to display devices
     def display_devices(self, devices=None):
         self.device_listbox.delete(0, tk.END)
         devices_to_display = devices or self.devices
@@ -96,6 +101,7 @@ class Dashboard(tk.Tk):
         device_count = len(devices_to_display)
         self.device_count_label.config(text=f"Total Devices: {device_count}")
 
+    # With the help of username and password this function gets the token
     def get_token(self):
         data = {
             'username': self.name,

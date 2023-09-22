@@ -7,6 +7,7 @@ from .models import Device
 from rest_framework.authtoken.models import Token
 
 class DeviceConsumer(AsyncWebsocketConsumer):
+    # Establish connection
     async def connect(self):
         self.group_name = 'device_updates'
         
@@ -30,6 +31,7 @@ class DeviceConsumer(AsyncWebsocketConsumer):
                 )
                 await self.accept()
 
+    # Access the DB to verify the token 
     @database_sync_to_async
     def get_token(self, authorization_value):
         try:
@@ -37,13 +39,15 @@ class DeviceConsumer(AsyncWebsocketConsumer):
         except Token.DoesNotExist:
             return None
 
-
-    async def disconnect(self, close_code):
+    # Connection disconnect
+    async def disconnect(self):
         await self.channel_layer.group_discard(
             self.group_name,
             self.channel_name
         )
 
+
+    # Send information when there is any change
     async def device_update(self, event):
         action = event['action']
         device_id = event['device_id']
