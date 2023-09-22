@@ -39,4 +39,19 @@ python dashboard.py
 Enter the username: sample_username
 Enter the password: sample_password
 ```
-+ Now in the Admin page of Django try adding a new device or modifying the existing devices, the same will be reflected in the Tkinter application. There you can filter the devices based on the status also
++ Now in the Admin page of Django try adding a new device or modifying the existing devices, the same will be reflected in the Tkinter application. There you can filter the devices based on their status also.
+
+
+
+## Output:
+### Initial dashboard
+![Screenshot from 2023-09-22 17-09-11](https://github.com/prathishbv/channel-dashboard/assets/81792348/b7988b06-7ba7-4916-b766-19d8650b17e4)
+
+### Dashboard after adding some devices
+![Screenshot from 2023-09-22 17-11-02](https://github.com/prathishbv/channel-dashboard/assets/81792348/14779d54-db4a-4cfc-a87c-fd3d33863824)
+
+### Dashboard after filtering
+![Screenshot from 2023-09-22 17-11-15](https://github.com/prathishbv/channel-dashboard/assets/81792348/819dcfb1-8337-4349-af71-ff53e9e9b46a)
+
+### Models created 
+![Screenshot from 2023-09-22 17-09-35](https://github.com/prathishbv/channel-dashboard/assets/81792348/e9458b8d-5700-4008-a5c4-582188f11d00)
