@@ -12,7 +12,6 @@ daphne==3.0.2
 Django==3.2
 djangorestframework==3.14.0
 gevent==23.9.1
-greenlet==2.0.2
 hyperlink==21.0.0
 idna==3.4
 incremental==22.10.0
