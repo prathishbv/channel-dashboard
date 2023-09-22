@@ -4,6 +4,7 @@ import json
 import asyncio
 import websockets
 import threading
+import requests
 
 class Dashboard(tk.Tk):
     def __init__(self):
@@ -37,8 +38,10 @@ class Dashboard(tk.Tk):
 
         self.device_count_label = tk.Label(self)
         self.device_count_label.pack(pady=10)
-
+        self.url = 'http://127.0.0.1:8000/api-token-auth/'
         self.devices = []  
+        self.name = "prathish"
+        self.password = "1234"
 
         self.websocket_thread = threading.Thread(target=self.start_websocket)
         self.websocket_thread.daemon = True
@@ -54,7 +57,11 @@ class Dashboard(tk.Tk):
 
     async def websocket_handler(self):
         try:
-            async with websockets.connect('ws://localhost:8000/ws/devices/') as websocket:
+            token = self.get_token()
+            headers = {
+                'Authorization': f'Token {token}'
+            }
+            async with websockets.connect('ws://localhost:8000/ws/devices/', extra_headers=headers) as websocket:
                 await websocket.send(json.dumps({'action': 'get_devices'}))
                 while True:
                     response = await websocket.recv()
@@ -89,6 +96,23 @@ class Dashboard(tk.Tk):
         device_count = len(devices_to_display)
         self.device_count_label.config(text=f"Total Devices: {device_count}")
 
+    def get_token(self):
+        data = {
+            'username': self.name,
+            'password': self.password
+        }
+        response = requests.post(self.url, data=data)
+
+        if response.status_code == 200:
+            token_data = response.json()
+            token = token_data.get('token')
+            # print(f'Token: {token}')
+            return token
+        else:
+            print(f'Authentication failed. Status code: {response.status_code}')
+            raise Exception("Invalid Credenials")
+
 if __name__ == "__main__":
     dashboard = Dashboard()
     dashboard.mainloop()
+
