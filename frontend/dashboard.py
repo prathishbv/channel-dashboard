@@ -113,6 +113,8 @@ class Dashboard(tk.Tk):
             raise Exception("Invalid Credenials")
 
 if __name__ == "__main__":
+    username = input("Enter the username ")
+    password = input("Enter the password ")
     dashboard = Dashboard()
     dashboard.mainloop()
 
